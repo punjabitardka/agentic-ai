@@ -1,14 +1,14 @@
-# 1. Start with a Python base image
-FROM python:3.10-slim
+# 1. Start with Python 3.11 (or higher) to satisfy requirements
+FROM python:3.11-slim
 
-# 2. Set the working directory inside the container
+# 2. Set the working directory
 WORKDIR /app
 
-# 3. Copy your project files into the container
+# 3. Copy everything
 COPY . .
 
-# 4. Install your Python libraries
+# 4. Install libraries (this should work now!)
 RUN pip install --no-cache-dir -r requirements.txt
 
-# 5. Tell the container how to run your app
+# 5. Launch the Streamlit UI
 CMD ["streamlit", "run", "app.py", "--server.port", "7860", "--server.address", "0.0.0.0"]

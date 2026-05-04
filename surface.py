@@ -1,5 +1,5 @@
 from serpapi import GoogleSearch as gs
-from config import serp_key,search_key
+from config import serp_key, search_key, IMGBB_KEY
 import requests
 import base64
 import os

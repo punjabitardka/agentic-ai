@@ -1,5 +1,4 @@
 import streamlit as st
-import fastapi
 from surface import surfaceagent 
 
 agent = surfaceagent()
@@ -101,6 +100,6 @@ if st.button("Run OSINT Search"):
             results_vr2 = agent.search_image_VR2(final_target)
             st.success("VR2 Engine Results:")
             st.write(results_vr2)
-            
+
 
 

@@ -102,7 +102,4 @@ if st.button("Run OSINT Search"):
             st.success("VR2 Engine Results:")
             st.write(results_vr2)
 
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=7860)
 

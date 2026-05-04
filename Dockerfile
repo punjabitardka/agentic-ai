@@ -1,22 +1,24 @@
-# 1. Start with Python 3.11
-FROM python:3.11-slim
+# 1. Use Python 3.12 - This matches your modern setup better
+FROM python:3.12-slim
 
-# 2. Install system dependencies needed for OSINT/Image tools
-# We add build-essential for compiling and libgl1 for image processing
+# 2. Install EVERYTHING needed for OSINT, Image processing, and Compiling
 RUN apt-get update && apt-get install -y \
     build-essential \
+    cmake \
     libgl1-mesa-glx \
     libglib2.0-0 \
+    python3-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # 3. Set the working directory
 WORKDIR /app
 
-# 4. Copy everything
+# 4. Copy your files
 COPY . .
 
-# 5. Install Python libraries
+# 5. Upgrade pip and install your requirements
+RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
-# 6. Launch the Streamlit UI
+# 6. Start the Streamlit app
 CMD ["streamlit", "run", "app.py", "--server.port", "7860", "--server.address", "0.0.0.0"]

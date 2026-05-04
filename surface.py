@@ -28,9 +28,10 @@ class surfaceagent:
             "url": image_url,
             "api_key": self.api_key
         }
+        print(f"DEBUG: Searching for URL -> {image_url}")
         search = gs(params)
         results = search.get_dict()
-        visual_matches_thingy = results["visual_matches"]
+        visual_matches_thingy = results.get("visual_matches", [])
         return visual_matches_thingy
 
     def search_image_VR2(self,image_url):
@@ -41,7 +42,7 @@ class surfaceagent:
         }
         search_12 = gs(params_2)
         results = search_12.get_dict()
-        visual_matches = results["visual_matches"]
+        visual_matches = results.get("visual_matches",[])
         return visual_matches
     
     #to upload jpeg/...files to the cloud and get a public url 

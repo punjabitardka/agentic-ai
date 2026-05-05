@@ -50,11 +50,11 @@ class surfaceagent:
         api_key=self.api_key3
         url = "https://api.imgbb.com/1/upload"
 
-        image = base64.b64encode(file_bytes)
+        image = base64.b64encode(file_byte)
 
         to_deliver = {
             "key": api_key,
-            "image": encoded_image
+            "image": image
 
         }
 

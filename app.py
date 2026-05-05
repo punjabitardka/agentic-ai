@@ -86,20 +86,22 @@ if st.button("Run OSINT Search"):
     elif image_url:
         final_target = image_url
     else:
-        st.write("enter a valid url or JPEG/.... image file")
+        st.error("Please enter a valid URL or upload an image file.")
 
-    if request_code == True:
-        try:
-        
-            results = agent.search_image(final_target)
-            st.success("Primary Engine Results:")
-            st.write(results) 
-        
-        except Exception as e:
-            st.warning(f"Primary Server Busy. Switching to VR2.....")
+    
+    if final_target:
+        if request_code == True:
+            try:
+                results = agent.search_image(final_target)
+                st.success("Primary Engine Results:")
+                st.write(results) 
+            except Exception as e:
+                st.warning(f"Primary Server Busy. Switching to VR2.....")
+                results_vr2 = agent.search_image_VR2(final_target)
+                st.success("VR2 Engine Results:")
+                st.write(results_vr2)
+        else:
+            st.info("Primary Key Depleted. Using VR2 Engine...")
             results_vr2 = agent.search_image_VR2(final_target)
             st.success("VR2 Engine Results:")
             st.write(results_vr2)
-
-
-

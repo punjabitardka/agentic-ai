@@ -82,26 +82,29 @@ if st.button("Run OSINT Search"):
     final_target = None 
  
     if uploaded_file is not None:
-        final_target = agent.upload_cloud(uploaded_file.read())
-    elif image_url:
-        final_target = image_url
-    else:
-        st.error("Please enter a valid URL or upload an image file.")
-
+        try:
+            final_target= agent.upload_cloud(uploaded_file.read())
+            st.info(f"File Received: {uploaded_file.name} ({len(final_target)} bytes)")
+        except Exception as e:
+            st.error(f"Upload Error: {e}")
     
     if final_target:
         if request_code == True:
-            try:
-                results = agent.search_image(final_target)
-                st.success("Primary Engine Results:")
-                st.write(results) 
-            except Exception as e:
-                st.warning(f"Primary Server Busy. Switching to VR2.....")
-                results_vr2 = agent.search_image_VR2(final_target)
-                st.success("VR2 Engine Results:")
-                st.write(results_vr2)
+            with st.spinner("Searching global databases..."):
+                try:
+                    results = agent.search_image(final_target)
+                    if results:
+                        st.success("Results Found:")
+                        st.write(results)
+                    else:
+                        st.warning("No matches found in the current indices.")
+                except Exception as e:
+                    st.error(f"Engine Error: {e}")
         else:
             st.info("Primary Key Depleted. Using VR2 Engine...")
             results_vr2 = agent.search_image_VR2(final_target)
             st.success("VR2 Engine Results:")
             st.write(results_vr2)
+    else:
+            st.error("The app didn't receive your file. If you see a Red X, disable 'Brave Shields' or use the Direct URL provided above.")
+            

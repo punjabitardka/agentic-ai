@@ -5,3 +5,4 @@
   Local URL: http://localhost:8501
   Network URL: http://192.168.1.41:8501
 
+2026-05-05 15:51:58.076 An update to the [server] config option section was detected. To have these changes be reflected, please restart streamlit.
